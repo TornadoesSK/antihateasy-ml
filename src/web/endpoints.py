@@ -4,4 +4,4 @@ endpoints=Blueprint('endpoints',__name__)
 
 @endpoints.route('/', methods=['GET'])
 def home():
-    return "HEllo world"
+    return "Hello world"
