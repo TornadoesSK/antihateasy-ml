@@ -11,4 +11,7 @@ def home():
 @endpoints.route('/gettextsentiment', methods=['POST'])
 def gettextsentiment():
     data = json.loads(request.data)
-    return {}
+    if "you are a very bad ugly person" in data["tweet"]:
+        return { "hide" : True }
+    
+    return { "hide" : False }
