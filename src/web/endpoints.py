@@ -1,8 +1,9 @@
 from flask import Blueprint, request, abort
 import json
+from ..ml import Net
 
-
-endpoints=Blueprint('endpoints',__name__)
+endpoints=Blueprint('endpoints', __name__)
+model = Net.load_from_checkpoint("src/ml/checkpoints/50epochs.ckpt")
 
 @endpoints.route('/', methods=['GET'])
 def home():
@@ -14,8 +15,10 @@ def gettextsentiment():
     # if a username isn't supplied in the request, return a 400 bad request
     if "tweet" not in data.keys():
         abort(400)
-        
-    if "you are a very bad ugly person" in data["tweet"]:
-        return { "hide" : True }
+
+    pred = model.predict_sentence(data["tweet"])
+
+    is_bad = pred["class"] != 2
     
-    return { "hide" : False }
+    return { "hide" : is_bad }
+    

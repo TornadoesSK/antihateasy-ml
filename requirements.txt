@@ -1,1 +1,6 @@
 flask==2.0.2
+torch
+torchtext
+pytorch_lightning
+torchmetrics
+pandas
