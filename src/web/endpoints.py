@@ -3,7 +3,7 @@ import json
 from ..ml import Net
 
 endpoints=Blueprint('endpoints', __name__)
-model = Net.load_from_checkpoint("src/ml/checkpoints/50epochs.ckpt")
+model = Net.load_from_checkpoint("src/ml/checkpoints/65epochs.ckpt")
 
 @endpoints.route('/', methods=['GET'])
 def home():
