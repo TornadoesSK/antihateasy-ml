@@ -18,6 +18,7 @@ class Net(LightningModule):
         return self.model(x)
 
     def predict_sentence(self, sentence):
+        self.eval()
         transformed = XLMR_BASE_ENCODER.transform()(sentence)
         transformed = F.to_tensor(transformed).unsqueeze(0)
         logits = self(transformed).detach()
